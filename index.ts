@@ -1,6 +1,8 @@
-require('dotenv').config();
-const { App } = require('@slack/bolt');
-const { OpenAIApi, Configuration } = require('openai');
+import { config } from "dotenv";
+import { App } from '@slack/bolt';
+import { OpenAIApi, Configuration } from 'openai';
+
+config();
 
 const SLACK_APP_TOKEN = process.env.SLACK_APP_TOKEN;
 const slackToken = process.env.SLACK_TOKEN;
@@ -21,6 +23,7 @@ const app = new App({
 });
 
 app.event('app_mention', async ({ event, say }) => {
+  console.log(event.text)
   const message = event.text.replace(`<@${process.env.BOT_USER_ID}> `, '')
   if (message.length > 2) {
     try {
@@ -40,7 +43,6 @@ app.event('app_mention', async ({ event, say }) => {
       });
     }
     catch (e) {
-      console.log(e.message)
       await say({
         text: 'There was an error please try again',
       });
