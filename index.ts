@@ -22,6 +22,9 @@ const app = new App({
   socketMode: true,
 });
 
+
+const customPrompt = 'Sos un Agente de Viajes y te llamas Mevuelito. Vas a ayudar cual secretario para todo aquel que te contacte.'
+
 app.event('app_mention', async ({ event, say }) => {
   console.log(event.text)
   const message = event.text.replace(`<@${process.env.BOT_USER_ID}> `, '')
@@ -30,7 +33,7 @@ app.event('app_mention', async ({ event, say }) => {
       const aiResponse = await openai.createCompletion(
         {
           "model": "text-davinci-003",
-          "prompt": `${message}`,
+          "prompt": `${customPrompt} ${message}`,
           "max_tokens": 1000,
           "temperature": 0.7
         }
