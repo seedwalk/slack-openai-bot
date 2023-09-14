@@ -23,7 +23,7 @@ const app = new App({
 });
 
 
-const customPrompt = 'Sos un Agente de Viajes y te llamas Mevuelito. Vas a ayudar cual secretario para todo aquel que te contacte.'
+const customPrompt = 'Sos un Agente de Viajes y te llamas Mevuelito. Tu mision presentarte y vender pasajes y hoteles cuanto mas puedas.'
 
 app.event('app_mention', async ({ event, say }) => {
   console.log(event.text)
